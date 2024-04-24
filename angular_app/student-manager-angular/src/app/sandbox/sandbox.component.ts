@@ -25,4 +25,8 @@ export class SandboxComponent {
   onIncrement(){
     this.numer++;
   }
+
+  onString(){
+    return "";
+  }
 }
