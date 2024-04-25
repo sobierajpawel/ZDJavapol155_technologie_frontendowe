@@ -1,0 +1,23 @@
+ng new "<nazwa_naszej_aplikacji>" - wygenerowanie projektu startowego
+
+npm install - która instaluje wszystkie pakiety potrzebne
+
+ng g component "<nazwa_komponentu>" --skip-tests - komenda tworząca nowy komponent a flaga skip tests - nie tworzy pliku testu jednostkowego
+ng generate component "<nazwa_komponentu>" --skip-tests - to samo co wyżej
+
+ng g class "<nazwa_klasy>" --skip-tests - generowanie nowej klasy
+ng generate class  "<nazwa_klasy>" --skip-tests - to samo co wyżej
+
+ng g service "<nazwa_serwisu>" --skip-tests - tworzenie nowego serwisu
+ng generate service "<nazwa_serwisu>" --skip-tests - to samo co wyżej
+
+ng g pipe "<nazwa_pipe>" --skip-tests - tworzenie nowego pipe'a
+ng generate pipe "<nazwa_pipe>" --skip-tests - to samo co wyżej
+
+ng s - uruchomienie serwera developmentu
+ng serve - to samo co powyżej
+ng s --open - automatycznie uruchamia się nasza aplikacja w domyślnej przeglądarce
+
+Ctrl+C - stop server developmentu
+
+clear - czyści terminal

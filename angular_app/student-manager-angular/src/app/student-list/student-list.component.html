@@ -4,6 +4,21 @@
     <button (click)="toogleDisplay()" class="btn btn-secondary">Zmień sposób wyświetlania</button>
 </div>
 
+<div class="col-4 mt-2 mb-2">
+    <input (keyup)="search(search_input.value)" #search_input
+     class="form-control" type="text" placeholder="Wyszukaj frazę">
+</div>
+
+<div *ngIf="isDataLoaded === false" class="spinner-border text-primary"
+    style="margin:auto;left:50%;position:absolute;top:50%" role="status">
+</div>
+
+@if(isErrorOccured){
+<div class="alert alert-danger" style="margin-top:10px" role="alert">
+    Nie udało się pobrać danych! Wystąpił błąd!
+</div>
+}
+
 @if(isTableVisible == true){
 <table class="table table-hover">
     <thead>
@@ -15,10 +30,12 @@
     </thead>
     <tbody>
         @for(student of students; track student.id){
-        <tr>
-            <td>{{student.id}}</td>
-            <td>{{student.name}}</td>
-            <td>{{student.email}}</td>
+        <tr [ngClass]="{'table-warning': student.id === 1,
+            'table-danger': student.id >= 7 || student.name[0] === 'C',
+            'table-primary' : student.email[0].toLowerCase() === 'k'}">
+            <td>{{student.id }}</td>
+            <td [innerHTML]="student.name | highlightSearch:search_input.value "></td>
+            <td [innerHTML]="student.email | lowercase | highlightSearch:search_input.value"></td>
         </tr>
         }
 
@@ -26,14 +43,12 @@
 </table>
 } @else {
 <ol class="list-group">
-    @for(student of students;track student.id){
-    <li class="list-group-item d-flex justify-content-between align-items-start">
+    <li *ngFor="let student of students" class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto">
-            <div class="fw-bold">{{student.name}}</div>
-            {{student.email}}
+            <div class="fw-bold" [innerHTML]="student.name | textTransform | highlightSearch:search_input.value "></div>
+            <span [ngClass]="{'fw-bold':student.id % 2 === 0}" [innerHTML]="student.email | highlightSearch:search_input.value"></span>
         </div>
         <span class="badge text-bg-primary rounded-pill">Id: {{student.id}}</span>
     </li>
-    }
 </ol>
 }
