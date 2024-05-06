@@ -34,7 +34,8 @@
             'table-danger': student.id >= 7 || student.name[0] === 'C',
             'table-primary' : student.email[0].toLowerCase() === 'k'}">
             <td>{{student.id }}</td>
-            <td [innerHTML]="student.name | highlightSearch:search_input.value "></td>
+            <td [innerHTML]="student.name | highlightSearch:search_input.value ">
+            </td>
             <td [innerHTML]="student.email | lowercase | highlightSearch:search_input.value"></td>
         </tr>
         }

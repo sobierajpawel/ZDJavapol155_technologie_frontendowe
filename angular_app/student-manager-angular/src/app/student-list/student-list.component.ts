@@ -62,6 +62,7 @@ export class StudentListComponent {
   }
 
   search(phrase : string){
+    console.log(phrase);
     this.students = this.filtersStudent.filter
     (x=>x.name.toLowerCase().includes(phrase.toLowerCase()) ||
       x.email.toLowerCase().includes(phrase.toLowerCase()));

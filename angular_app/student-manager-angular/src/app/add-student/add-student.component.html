@@ -1,0 +1,57 @@
+<h2>Dodaj nowego studenta</h2>
+
+<form #form="ngForm" (submit)="save(form)">
+    <!-- Pole imię i nazwisko -->
+    <div>
+        <label class="form-label">Imię i nazwisko:</label>
+        <input #name_input="ngModel" [(ngModel)]="student.name" required minlength="5" name="student_name"
+            class="form-control" placeholder="Wprowadź imię i nazwisko" type="text">
+        @if (name_input.hasError('required')){
+        <p class="error-message">Pole musi wypełnione</p>
+        }
+        @if (name_input.hasError('minlength')){
+        <p class="error-message">Pole musi mieć minimum 5 znaków</p>
+        }
+
+    </div>
+
+    <!-- Pole email -->
+    <div>
+        <label class="form-label">Email:</label>
+        <input class="form-control" #email_input="ngModel" name="student_email" required email
+            [(ngModel)]="student.email" placeholder="Wprowadź email" type="email">
+        @if (email_input.hasError('required')){
+        <p class="error-message">Pole musi wypełnione</p>
+        }
+        @if (email_input.hasError('email')){
+        <p class="error-message">Pole musi mieć formę adresu mailowego</p>
+        }
+    </div>
+
+    <!-- Przyciski -->
+    <div class="mt-4">
+        <button [disabled]="isProcessing" class="btn btn-outline-primary me-2">
+            @if(isProcessing){
+            <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+            }
+            Zapisz</button>
+        <button (click)="setDefaultValues()" type="button" class="btn btn-outline-secondary">Wypełnij danymi
+            testowymi</button>
+    </div>
+</form>
+
+@if(isValidationError){
+<p class="error-message">Wystąpił przynajmniej jeden błąd w formularzu</p>
+}
+
+@if(isSavedSuccessfuly){
+<div class="mt-2 alert alert-success">
+    Dodano nowego studenta!
+</div>
+}
+
+@if(errorCode){
+    <div class="mt-2 alert alert-danger">
+        Wystąpił błąd kod: {{errorCode}}
+    </div>
+}

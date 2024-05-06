@@ -6,10 +6,15 @@ import { Student } from './student';
   providedIn: 'root'
 })
 export class HttpStudentService {
+  private url : string = "https://jsonplaceholder.typicode.com/users";
 
   constructor(private httpClient : HttpClient) { }
 
   getStudents(){
-    return this.httpClient.get<Student[]>("https://jsonplaceholder.typicode.com/users");
+    return this.httpClient.get<Student[]>(this.url);
+  }
+
+  postStudent(student : Student){
+    return this.httpClient.post(this.url, student);
   }
 }
