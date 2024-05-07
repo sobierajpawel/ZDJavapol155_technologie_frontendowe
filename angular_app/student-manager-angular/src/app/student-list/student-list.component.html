@@ -26,6 +26,7 @@
             <th>Id</th>
             <th>Imię i nazwisko</th>
             <th>Adres email</th>
+            <th>Operacje</th>
         </tr>
     </thead>
     <tbody>
@@ -37,6 +38,9 @@
             <td [innerHTML]="student.name | highlightSearch:search_input.value ">
             </td>
             <td [innerHTML]="student.email | lowercase | highlightSearch:search_input.value"></td>
+            <td><button 
+                [routerLink]="'/edit-student/'+student.id"
+                class="btn btn-warning btn-sm">Edytuj</button></td>
         </tr>
         }
 

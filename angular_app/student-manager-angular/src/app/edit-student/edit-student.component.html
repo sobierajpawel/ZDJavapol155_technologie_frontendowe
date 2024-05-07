@@ -1,0 +1,22 @@
+<h2>Edytuj studenta</h2>
+
+<form class="row mt-4">
+    <div class="col-6">
+        <label class="form-label">Imię i nazwisko</label>
+        <input name="student_name"
+        [(ngModel)]="student.name"
+        class="form-control" type="text"/>
+    </div>
+
+    <div class="col-6">
+        <label class="form-label">Email</label>
+        <input 
+        name="student_email"
+        [(ngModel)]="student.email"
+        class="form-control" type="text"/>
+    </div>
+
+    <div class="mt-4">
+        <button class="btn btn-outline-primary">Zapisz</button>
+    </div>
+</form>

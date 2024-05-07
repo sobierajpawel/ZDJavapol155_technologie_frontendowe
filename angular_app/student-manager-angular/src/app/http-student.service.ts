@@ -10,6 +10,10 @@ export class HttpStudentService {
 
   constructor(private httpClient : HttpClient) { }
 
+  getStudentById(id : number){
+    return this.httpClient.get<Student>(this.url + '/' + id);
+  }
+
   getStudents(){
     return this.httpClient.get<Student[]>(this.url);
   }
