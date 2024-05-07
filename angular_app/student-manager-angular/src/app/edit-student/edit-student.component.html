@@ -1,22 +1,50 @@
 <h2>Edytuj studenta</h2>
 
-<form class="row mt-4">
-    <div class="col-6">
+<form #form="ngForm" (submit)="save(form)" class="row mt-4">
+    <div class="col-6" style="min-height: 100px;">
         <label class="form-label">Imię i nazwisko</label>
-        <input name="student_name"
-        [(ngModel)]="student.name"
-        class="form-control" type="text"/>
+        <input name="student_name" required #input_name="ngModel" minlength="5" [readonly]="!isDataLoaded"
+            [(ngModel)]="student.name" class="form-control" type="text" />
+        @if(input_name.hasError("required")){
+        <p class="error-message">Pole musi być wypełnione</p>
+        }
+        @if(input_name.hasError("minlength")){
+        <p class="error-message">Pole musi mieć minimum 5 znaków</p>
+        }
+
     </div>
 
     <div class="col-6">
         <label class="form-label">Email</label>
-        <input 
-        name="student_email"
-        [(ngModel)]="student.email"
-        class="form-control" type="text"/>
+        <input #input_email="ngModel" required email [readonly]="!isDataLoaded" name="student_email"
+            [(ngModel)]="student.email" class="form-control" type="text" />
+        @if(input_email.hasError("required")){
+        <p class="error-message">Pole musi być wypełnione</p>
+        }
+        @if(input_email.hasError("email")){
+        <p class="error-message">Pole musi mieć format emaila</p>
+        }
     </div>
 
-    <div class="mt-4">
-        <button class="btn btn-outline-primary">Zapisz</button>
+    <div>
+        <button [disabled]="!isDataLoaded" class="btn btn-outline-primary">Zapisz</button>
+        <button (click)="setPreviousValues()" type="button" class="btn btn-outline-secondary ms-2">Wróć do wartości
+            niezapisanych</button>
     </div>
 </form>
+
+@if(isValidationErrorOccured){
+    <p class="error-message">Wystąpił przynajmniej jeden błąd walidacji!</p>
+}
+
+@if(isErrorOccured){
+<div class="alert alert-danger mt-4">
+    {{ errorMessage }}
+</div>
+}
+
+@if(isUploadedSuccessful){
+<div class="alert alert-success mt-4">
+    Zaktualizowano studenta
+</div>
+}

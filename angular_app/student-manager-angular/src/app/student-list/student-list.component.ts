@@ -27,6 +27,8 @@ export class StudentListComponent {
     // new Student(61, "Piotr Testowy", "testowy@gmail.com")
   ];
   filtersStudent : Student[] = [];
+  isDeletedProcessing = false;
+  deletedMessage = "";
 
   constructor(private httpStudentService: HttpStudentService) {
     console.log("Przed wywołaniem httpStudentService");
@@ -67,5 +69,20 @@ export class StudentListComponent {
     this.students = this.filtersStudent.filter
     (x=>x.name.toLowerCase().includes(phrase.toLowerCase()) ||
       x.email.toLowerCase().includes(phrase.toLowerCase()));
+  }
+
+  delete(id : number){
+    this.isDeletedProcessing = true;
+    this.httpStudentService.deleteStudent(id).subscribe(_=>{
+      this.deletedMessage = "Usunięto studenta o id: " + id;
+      this.isDeletedProcessing= false;
+      
+      this.students = this.students.filter(x=>x.id !== id);
+      this.filtersStudent = this.filtersStudent.filter(x=>x.id !== id);
+    
+      setTimeout(()=>{
+        this.deletedMessage = "";
+      },5000);
+    });
   }
 }

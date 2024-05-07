@@ -11,7 +11,7 @@ export const routes: Routes = [
     // localhost:4200/sandbox
     {path:"sandbox", component:SandboxComponent},
     //localhost:4200/students
-    {path:"students", component:StudentListComponent},
+    {path:"students", component:StudentListComponent, },
     //localhost:4200/add-student
     {path:"add-student", component:AddStudentComponent},
     //localhost:4200/edit-student/2

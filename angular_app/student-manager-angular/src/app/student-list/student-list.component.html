@@ -5,8 +5,8 @@
 </div>
 
 <div class="col-4 mt-2 mb-2">
-    <input (keyup)="search(search_input.value)" #search_input
-     class="form-control" type="text" placeholder="Wyszukaj frazę">
+    <input (keyup)="search(search_input.value)" #search_input class="form-control" type="text"
+        placeholder="Wyszukaj frazę">
 </div>
 
 <div *ngIf="isDataLoaded === false" class="spinner-border text-primary"
@@ -16,6 +16,12 @@
 @if(isErrorOccured){
 <div class="alert alert-danger" style="margin-top:10px" role="alert">
     Nie udało się pobrać danych! Wystąpił błąd!
+</div>
+}
+
+@if (deletedMessage){
+<div class="alert alert-danger mt-2">
+    {{deletedMessage}}
 </div>
 }
 
@@ -38,9 +44,10 @@
             <td [innerHTML]="student.name | highlightSearch:search_input.value ">
             </td>
             <td [innerHTML]="student.email | lowercase | highlightSearch:search_input.value"></td>
-            <td><button 
-                [routerLink]="'/edit-student/'+student.id"
-                class="btn btn-warning btn-sm">Edytuj</button></td>
+            <td><button [routerLink]="'/edit-student/'+student.id" class="btn btn-warning btn-sm">Edytuj</button>
+                <button [disabled]="isDeletedProcessing" (click)="delete(student.id)"
+                    class="btn btn-danger btn-sm ms-1">Usuń</button>
+            </td>
         </tr>
         }
 
@@ -51,7 +58,14 @@
     <li *ngFor="let student of students" class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto">
             <div class="fw-bold" [innerHTML]="student.name | textTransform | highlightSearch:search_input.value "></div>
-            <span [ngClass]="{'fw-bold':student.id % 2 === 0}" [innerHTML]="student.email | highlightSearch:search_input.value"></span>
+            <span [ngClass]="{'fw-bold':student.id % 2 === 0}"
+                [innerHTML]="student.email | highlightSearch:search_input.value"></span>
+
+            <div>
+                <button [routerLink]="'/edit-student/'+student.id" class="btn btn-warning btn-sm">Edytuj</button>
+                <button [disabled]="isDeletedProcessing" (click)="delete(student.id)"
+                    class="btn btn-danger btn-sm ms-1">Usuń</button>
+            </div>
         </div>
         <span class="badge text-bg-primary rounded-pill">Id: {{student.id}}</span>
     </li>
