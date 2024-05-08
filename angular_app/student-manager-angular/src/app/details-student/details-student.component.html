@@ -1,0 +1,34 @@
+<h2>Szczegóły studenta</h2>
+
+<div class="row">
+    <div class="col-6">
+        <app-student-data
+        [id]="student.id"
+        [fullName]="student.name"
+        [email]="student.email"
+        ></app-student-data>
+    </div>
+    <div class="col-6">
+        <app-todo-items
+        [todoItems]="todoItems"
+        ></app-todo-items>
+    </div>
+</div>
+
+<div class="row">
+    <app-action-buttons
+    (btn1_click_emitter)="editStudent()"
+    (btn2_click_emitter)="goBack()"
+    [button1_name]="'Edytuj studenta'"
+    [button2_name]="'Powrót'"
+    ></app-action-buttons>
+</div>
+
+<div class="row mt-4">
+    <app-action-buttons
+    (btn1_click_emitter)="goBack()"
+    (btn2_click_emitter)="editStudent()"
+    [button1_name]="'Powrót'"
+    [button2_name]="'Edytuj studenta'"
+    ></app-action-buttons>
+</div>

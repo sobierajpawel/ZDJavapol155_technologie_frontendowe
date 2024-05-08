@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { delay } from 'rxjs';
 import { TextTransformPipe } from "../text-transform.pipe";
 import { HighlightSearchPipe } from "../highlight-search.pipe";
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 @Component({
     selector: 'app-student-list',
@@ -30,7 +30,9 @@ export class StudentListComponent {
   isDeletedProcessing = false;
   deletedMessage = "";
 
-  constructor(private httpStudentService: HttpStudentService) {
+  constructor(private httpStudentService: HttpStudentService, 
+    private router : Router, private activatedRoute : ActivatedRoute
+  ) {
     console.log("Przed wywołaniem httpStudentService");
 
     // Prosty model subscribe - obsługuje tylko pozytywną odpowiedź z serwera
@@ -58,10 +60,41 @@ export class StudentListComponent {
       });
 
     console.log("Po wywołaniu httpStudentService");
+
+    this.verifyQueryParams();
+  }
+
+  verifyQueryParams(){
+    this.activatedRoute.queryParams.subscribe(queryParams=>{
+      if(queryParams["type"] === 'list'){
+        this.isTableVisible = false;
+      }
+    })
   }
 
   toogleDisplay() {
     this.isTableVisible = !this.isTableVisible;
+
+    //doklejania opcjonalnego parametru do url'a
+    if (this.isTableVisible){
+      this.router.navigate([],
+        {
+          relativeTo: this.activatedRoute,
+          queryParams: { type: null},
+          queryParamsHandling : 'merge',
+          replaceUrl: true
+        }
+      );
+    } else {
+      this.router.navigate([],
+        {
+          relativeTo: this.activatedRoute,
+          queryParams: { type: 'list'},
+          queryParamsHandling : 'merge',
+          replaceUrl: true
+        }
+      );
+    }
   }
 
   search(phrase : string){

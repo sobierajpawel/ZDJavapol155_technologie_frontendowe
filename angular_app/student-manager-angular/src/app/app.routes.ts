@@ -4,6 +4,7 @@ import { SandboxComponent } from './sandbox/sandbox.component';
 import { StudentListComponent } from './student-list/student-list.component';
 import { AddStudentComponent } from './add-student/add-student.component';
 import { EditStudentComponent } from './edit-student/edit-student.component';
+import { DetailsStudentComponent } from './details-student/details-student.component';
 
 export const routes: Routes = [
     // localhost:4200/home
@@ -17,5 +18,8 @@ export const routes: Routes = [
     //localhost:4200/edit-student/2
     //localhost:4200/edit-student/5
     //localhost:4200/edit-student/10
-    {path:"edit-student/:id", component: EditStudentComponent}
+    {path:"edit-student/:id", component: EditStudentComponent},
+    //localhost:4200/detail-student/3
+    //localhost:4200/detail-student/5
+    {path:"detail-student/:id", component: DetailsStudentComponent}
 ];

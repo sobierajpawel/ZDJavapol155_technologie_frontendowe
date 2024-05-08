@@ -1,0 +1,8 @@
+<h4>Zadania do realizacji</h4>
+
+<ul class="list-group">
+  @for(todoItem of todoItems; track todoItem.id){
+  <li class="list-group-item" [ngClass]="{'list-group-item-success':todoItem.completed,
+    'list-group-item-danger': !todoItem.completed}">{{todoItem.title}}</li>
+  }
+</ul>

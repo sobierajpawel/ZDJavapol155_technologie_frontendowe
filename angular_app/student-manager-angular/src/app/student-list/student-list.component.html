@@ -44,7 +44,9 @@
             <td [innerHTML]="student.name | highlightSearch:search_input.value ">
             </td>
             <td [innerHTML]="student.email | lowercase | highlightSearch:search_input.value"></td>
-            <td><button [routerLink]="'/edit-student/'+student.id" class="btn btn-warning btn-sm">Edytuj</button>
+            <td>
+                <button [routerLink]="'/detail-student/'+student.id" class="btn btn-info btn-sm">Szczegóły</button>
+                <button [routerLink]="'/edit-student/'+student.id" class="btn btn-warning btn-sm ms-1">Edytuj</button>
                 <button [disabled]="isDeletedProcessing" (click)="delete(student.id)"
                     class="btn btn-danger btn-sm ms-1">Usuń</button>
             </td>
@@ -62,7 +64,8 @@
                 [innerHTML]="student.email | highlightSearch:search_input.value"></span>
 
             <div>
-                <button [routerLink]="'/edit-student/'+student.id" class="btn btn-warning btn-sm">Edytuj</button>
+                <button [routerLink]="'/detail-student/'+student.id" class="btn btn-info btn-sm">Szczegóły</button>
+                <button [routerLink]="'/edit-student/'+student.id" class="btn btn-warning btn-sm ms-1">Edytuj</button>
                 <button [disabled]="isDeletedProcessing" (click)="delete(student.id)"
                     class="btn btn-danger btn-sm ms-1">Usuń</button>
             </div>

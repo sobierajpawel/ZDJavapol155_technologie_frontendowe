@@ -2,6 +2,8 @@ ng new "<nazwa_naszej_aplikacji>" - wygenerowanie projektu startowego
 
 npm install - która instaluje wszystkie pakiety potrzebne
 
+(do komend generate) - parametr --dry-run - próbny rezultat komendy bez faktycznie utworzonych elementów
+
 ng g component "<nazwa_komponentu>" --skip-tests - komenda tworząca nowy komponent a flaga skip tests - nie tworzy pliku testu jednostkowego
 ng generate component "<nazwa_komponentu>" --skip-tests - to samo co wyżej
 
